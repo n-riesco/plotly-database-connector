@@ -1,3 +1,4 @@
+import * as beeline from './beeline';
 import * as Sql from './Sql';
 import * as Elasticsearch from './Elasticsearch';
 import * as S3 from './S3';
@@ -24,7 +25,9 @@ import * as ApacheDrill from './ApacheDrill';
 
 function getDatastoreClient(connection) {
     const {dialect} = connection;
-    if (dialect === 'elasticsearch') {
+    if (dialect === 'apache hive') {
+        return beeline;
+    } else if (dialect === 'elasticsearch') {
         return Elasticsearch;
     } else if (dialect === 's3') {
         return S3;

@@ -9,7 +9,8 @@ export const DIALECTS = {
     MSSQL: 'mssql',
     SQLITE: 'sqlite',
     S3: 's3',
-    APACHE_DRILL: 'apache drill'
+    APACHE_DRILL: 'apache drill',
+    APACHE_HIVE: 'apache hive'
 };
 
 const commonSqlOptions = [
@@ -110,7 +111,21 @@ export const CONNECTION_CONFIG = {
             'value': 'secretAccessKey',
             'type': 'password'
         }
-    ] // TODO - password options for apache drill
+    ], // TODO - password options for apache drill
+    [DIALECTS.APACHE_HIVE]: [
+        {'label': 'Username', 'value': 'username', 'type': 'text'},
+        {'label': 'Password', 'value': 'password', 'type': 'password'},
+        {
+            'label': 'URL',
+            'value': 'url',
+            'description': `
+                The JDBC URL to connect to
+                (default: jdbc:hive2://localhost:10000/)
+            `,
+            'placeholder': 'jdbc:hive2://localhost:10000/',
+            'type': 'text'
+        }
+    ]
 };
 
 
@@ -123,7 +138,8 @@ export const LOGOS = {
     [DIALECTS.MSSQL]: 'images/mssql-logo.png',
     [DIALECTS.SQLITE]: 'images/sqlite-logo.png',
     [DIALECTS.S3]: 'images/s3-logo.png',
-    [DIALECTS.APACHE_DRILL]: 'images/apache_drill-logo.png'
+    [DIALECTS.APACHE_DRILL]: 'images/apache_drill-logo.png',
+    [DIALECTS.APACHE_HIVE]: 'images/hive_logo_medium.jpg'
 };
 
 
