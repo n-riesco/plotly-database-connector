@@ -54,6 +54,7 @@ export function tables(connection) {
         .then(parse)
         .then(function({columnnames, rows}) {
             const index = columnnames.indexOf('tableName');
-            return rows[index] || [];
+            const tables = (index === -1) ? [] : rows.map(row => row[index]);
+            return tables.sort();
         });
 }
