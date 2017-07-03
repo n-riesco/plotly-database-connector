@@ -18,6 +18,8 @@ export default class Tab extends Component {
             label = `S3 - (${connectionObject.bucket})`;
         } else if (dialect === DIALECTS.APACHE_DRILL) {
             label = `Apache Drill (${connectionObject.host})`;
+        } else if (dialect === DIALECTS.APACHE_HIVE) {
+            label = `Apache Hive (${connectionObject.url})`;
         } else if (connectionObject.dialect === DIALECTS.ELASTICSEARCH) {
             label = `Elasticsearch (${connectionObject.host})`;
         } else if (connectionObject.dialect === DIALECTS.SQLITE) {
