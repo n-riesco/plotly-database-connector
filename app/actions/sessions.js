@@ -350,6 +350,8 @@ function PREVIEW_QUERY (dialect, table, database = '') {
                     size: 5
                 }
             });
+        case DIALECTS.APACHE_HIVE:
+            return `SELECT * FROM ${table} LIMIT 5;`;
         default:
             throw new Error(`Dialect ${dialect} is not one of the DIALECTS`);
     }

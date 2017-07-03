@@ -200,7 +200,8 @@ class Settings extends Component {
         const connectionObject = connections[selectedTab] || {};
         if (contains(connectionObject.dialect, [
                     DIALECTS.MYSQL, DIALECTS.MARIADB, DIALECTS.POSTGRES,
-                    DIALECTS.REDSHIFT, DIALECTS.MSSQL, DIALECTS.SQLITE
+                    DIALECTS.REDSHIFT, DIALECTS.MSSQL, DIALECTS.SQLITE,
+                    DIALECTS.APACHE_HIVE
         ])) {
             if (connectRequest.status === 200 && !tablesRequest.status) {
                 this.setState({editMode: false});
