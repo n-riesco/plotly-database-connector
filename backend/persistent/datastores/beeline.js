@@ -23,7 +23,9 @@ function beeline(query, connection) {
 
 function parse(stdout) {
     return new Promise((resolve, reject) => {
-        csvParse(stdout, function(err, result) {
+        csvParse(stdout, {
+            quote: '\0',
+        }, function(err, result) {
             if (err) reject(err);
             else {
                 const columnnames = result[0];
