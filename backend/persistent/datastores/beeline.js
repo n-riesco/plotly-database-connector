@@ -11,13 +11,33 @@ function beeline(query, connection) {
     const {url, username, password} = connection;
 
     // [TODO] [SECURITY]
-    const cmd = `beeline --outputformat=csv2 -u "${url}" -n "${username}" -p "${password}" -e "${query}"`;
+    const cmd = 'beeline --silent --outputformat=csv2';
 
     return new Promise(function(resolve, reject) {
-        exec(cmd, function(err, stdout, stderr) {
-            if (err) reject(err);
-            else resolve(stdout);
+        const child = exec(cmd, function(err, stdout, stderr) {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            // remove first empty line and last `\n`
+            let result = stdout.toString().trim();
+
+            // remove first three lines
+            let start = 1 + result.indexOf('\n');
+            start = 1 + result.indexOf('\n', start);
+            start = 1 + result.indexOf('\n', start);
+            result = result.substring(start);
+
+            // remove last line
+            let end = result.lastIndexOf('\n');
+            result = result.substring(0, end);  // end = -1 is treated as 0
+
+            resolve(result);
         });
+
+        child.stdin.write(`!connect ${url}\n${username}\n${password}\n`);
+        child.stdin.write(`${query}\n!quit\n`);
     });
 }
 
@@ -43,7 +63,7 @@ export function connect(connection) {
         '(password omitted)'
     );
 
-    return beeline('!quit', connection);
+    return beeline('', connection);
 }
 
 export function query(query, connection) {
