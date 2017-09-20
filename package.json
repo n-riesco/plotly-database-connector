@@ -17,6 +17,7 @@
     "rebuild:modules:node": "cross-env FSEVENTS_BUILD_FROM_SOURCE=true node scripts/install-modules.js",
     "lint": "eslint app test *.js",
     "test": "yarn run test-unit-all && yarn run test-e2e",
+    "test-e": "cross-env NODE_ENV=test mocha --compilers js:babel-register --require babel-polyfill ./test/integration_test.js",
     "test-e2e": "cross-env NODE_ENV=test mocha --compilers js:babel-register --require ./test/setup.js --require co-mocha ./test/integration_test.js",
     "test-e2e-local": "source test/set_creds.sh && yarn run test-e2e",
     "test-unit": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 electron-mocha --timeout 20000 --compilers js:babel-register ",
@@ -146,6 +147,7 @@
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
     "selenium-webdriver": "^2.53.1",
+    "spectron": "^3.7.2",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },
